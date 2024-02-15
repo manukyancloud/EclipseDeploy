@@ -1,34 +1,30 @@
 # Eclipse
 
-> Tweette detaylar mevcuttu.
-
-> İşlemleri herhangi bir sunucumuzda yapalım muhim değil.
 
 
-## Contrat Deploy:
+
+## Contrat Deployment:
 
 ```console
-# altta ki curl ile başlayan komutu girdikten sonra 1 i seçelim:
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source "$HOME/.cargo/env"
 
-# solana cli kurulumu - komutları tek tek kullanalım.
+# sol cli
 sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
 PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 solana config set --url https://staging-rpc.dev.eclipsenetwork.xyz
 
-# bu komut sonrası => key oluşacak, şifre belirleyip mnemonicleri ve cüzdan adresini kaydediyoruz
+# create key
 solana-keygen new
 
-# bu komutta cüzdana token alıyoruz
+# faucet
 solana airdrop 10
 
-# bu komut çalışması için 8 ram lazım - github swap space repom ile çözersiniz.
+# 8gb ram needed.
 solana-test-validator
 # komut çalışınca ctrl c ile durdurabilirsiniz.
 
-# 5 gün sonra not - 8 RAM ile dahi çözülmediyse farklı bir durum söz konusu - chatte yardım isteyiniz.
-
+# if 
 # nodejs kurulumu - komutları tek tek kullanalım
 sudo apt-get install -y ca-certificates curl gnupg
 sudo mkdir -p /etc/apt/keyrings
@@ -39,22 +35,22 @@ echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.co
 sudo apt-get update
 sudo apt-get install nodejs -y
 
-# kontrat deploy işlemini gerçekleştirelim
+# deploy contract
 git clone https://github.com/solana-labs/example-helloworld
 cd example-helloworld
 npm install
 
-# burda biraz bekletecek rusttan dolayı - uzun sürebilir.
+# wait a min
 npm run build:program-rust
 
-# program id not edin - FORMDA SONRADAN BU ID KULLANACAKSINIZ
+# Program id
 solana program deploy dist/program/helloworld.so
 npm run start
 # success çıktısı verecek en sonda.
 
 ```
 
-## Bridge işlemi:
+## Bridge
 
 ```console
 sudo apt update -y && sudo apt upgrade -y
@@ -66,13 +62,13 @@ cd testnet-deposit
 yarn install
 yarn add ethers
 
-# Altta ki komutu düzenleyelim (tırnakları kaldırın):
+# 
 node deposit.js <solanaAdresi> 0x7C9e161ebe55000a3220F972058Fb83273653a6e 500000 100 <MetamaskPrivateKeyi> https://rpc.sepolia.org
-# solana cüzdanı yukarıda oluşturduk onu import edin yeni profilde.
+# 
 ```
 
-> başarılıysa success ve tx çıktısı verecek
+> success output
 
-> https://explorer.dev.eclipsenetwork.xyz/?cluster=testnet burdan solana cüzdanı kontrol edip eth var mı yok mu bakıyoruz. varsa ok.
+> https://explorer.dev.eclipsenetwork.xyz/?cluster=testnet 
 
-> Formu doldurun: https://docs.google.com/forms/d/e/1FAIpQLSfJQCFBKHpiy2HVw9lTjCj7k0BqNKnP6G1cd0YdKhaPLWD-AA/viewform
+> Fill the form: https://docs.google.com/forms/d/e/1FAIpQLSfJQCFBKHpiy2HVw9lTjCj7k0BqNKnP6G1cd0YdKhaPLWD-AA/viewform
