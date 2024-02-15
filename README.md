@@ -22,10 +22,8 @@ solana airdrop 10
 
 # 8gb ram needed.
 solana-test-validator
-# komut çalışınca ctrl c ile durdurabilirsiniz.
 
-# if 
-# nodejs kurulumu - komutları tek tek kullanalım
+#  Node.js
 sudo apt-get install -y ca-certificates curl gnupg
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
